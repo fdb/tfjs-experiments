@@ -180,6 +180,7 @@ async function processFrame(
   });
   await tf.browser.toPixels(filtered, canvas);
   filtered.dispose();
+  tensorImage.dispose();
 
   ctx.globalCompositeOperation = "darken";
   ctx.drawImage(video, 0, 0, resultWidth, resultHeight);
