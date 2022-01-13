@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ProGAN</title>
+    <style>
+      html,
+      body {
+        overflow: hidden;
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #container {
+        display: grid;
+        grid-template-columns: repeat(20, 64px);
+        grid-template-rows: repeat(20, 64px);
+        gap: 2px;
+        width: 1298px;
+        height: 1298px;
+      }
+      canvas {
+        width: 64px;
+        height: 64px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
