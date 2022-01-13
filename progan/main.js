@@ -4,8 +4,12 @@ function lerp(tensor1, tensor2, t) {
 
 async function main() {
   const model = await tf.loadGraphModel(
-    "https://tfhub.dev/google/progan-128/1/model.json?tfjs-format=file"
+    "https://tfhub.dev/google/progan-128/1",
+    {
+      fromTFHub: true,
+    }
   );
+
   console.log(model);
   const space1 = tf.randomNormal([1, 512]);
   const space2 = tf.randomNormal([1, 512]);
