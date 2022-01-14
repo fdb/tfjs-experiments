@@ -23,6 +23,41 @@ const LABELS_CITYSCAPE = [
   "bicycle",
 ];
 
+// prettier-ignore
+const LABELS_ADE20K = [ 
+  'background', 'wall',         'building',   'sky',         'floor',
+  'tree',       'ceiling',      'road',       'bed',         'windowpane',
+  'grass',      'cabinet',      'sidewalk',   'person',      'earth',
+  'door',       'table',        'mountain',   'plant',       'curtain',
+  'chair',      'car',          'water',      'painting',    'sofa',
+  'shelf',      'house',        'sea',        'mirror',      'rug',
+  'field',      'armchair',     'seat',       'fence',       'desk',
+  'rock',       'wardrobe',     'lamp',       'bathtub',     'railing',
+  'cushion',    'base',         'box',        'column',      'signboard',
+  'chest',      'counter',      'sand',       'sink',        'skyscraper',
+  'fireplace',  'refrigerator', 'grandstand', 'path',        'stairs',
+  'runway',     'case',         'pool',       'pillow',      'screen',
+  'stairway',   'river',        'bridge',     'bookcase',    'blind',
+  'coffee',     'toilet',       'flower',     'book',        'hill',
+  'bench',      'countertop',   'stove',      'palm',        'kitchen',
+  'computer',   'swivel',       'boat',       'bar',         'arcade',
+  'hovel',      'bus',          'towel',      'light',       'truck',
+  'tower',      'chandelier',   'awning',     'streetlight', 'booth',
+  'television', 'airplane',     'dirt',       'apparel',     'pole',
+  'land',       'bannister',    'escalator',  'ottoman',     'bottle',
+  'buffet',     'poster',       'stage',      'van',         'ship',
+  'fountain',   'conveyer',     'canopy',     'washer',      'plaything',
+  'swimming',   'stool',        'barrel',     'basket',      'waterfall',
+  'tent',       'bag',          'minibike',   'cradle',      'oven',
+  'ball',       'food',         'step',       'tank',        'trade',
+  'microwave',  'pot',          'animal',     'bicycle',     'lake',
+  'dishwasher', 'screen',       'blanket',    'sculpture',   'hood',
+  'sconce',     'vase',         'traffic',    'tray',        'ashcan',
+  'fan',        'pier',         'screen',     'plate',       'monitor',
+  'bulletin',   'shower',       'radiator',   'glass',       'clock',
+  'flag',
+];
+
 const CROP_SIZE = 513;
 let shouldStop = false;
 
@@ -104,11 +139,13 @@ function copyToCanvas(src, srcCtx, dst, dstCtx) {
 }
 
 async function main() {
+  let frame = 0;
   let time = 0;
-  const model = await tf.loadGraphModel(modelUrl(), 1);
-  const selectedLabel = LABELS_CITYSCAPE.findIndex(
-    (label) => label === "person"
-  );
+  const model = await tf.loadGraphModel(modelUrl("ade20k"), 4);
+  // const selectedLabel = LABELS_CITYSCAPE.findIndex(
+  //   (label) => label === "person"
+  // );
+  const selectedLabel = LABELS_ADE20K.findIndex((label) => label === "flag");
   const video = await createVideo("../assets/nyc-walk.mp4");
 
   const canvas = document.getElementById("output");
@@ -133,8 +170,9 @@ async function main() {
     copyToCanvas(canvas, ctx, animationCanvas, animationCtx);
 
     // Advance one frame.
-    time += 1 / 29.97;
-    // time += 0.2;
+    frame++;
+    time = frame / 29.97;
+    // time += 0.5;
     video.currentTime = time;
 
     if (shouldStop) break;
@@ -189,5 +227,10 @@ async function processFrame(
 
 main();
 document.querySelector("#stop").addEventListener("click", () => {
+  shouldStop = true;
+});
+
+document.querySelector("#save-sequence").addEventListener("click", async () => {
+  const dirHandle = await window.showDirectoryPicker();
   shouldStop = true;
 });

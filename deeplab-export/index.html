@@ -8,12 +8,13 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script>
   </head>
   <body style="display: flex; flex-direction: column; gap: 1rem">
-    <canvas id="output" style="display: block"></canvas>
+    <canvas id="output" style="display: block; filter: brightness(5)"></canvas>
+    <canvas id="video-canvas" style="display: block"></canvas>
 
-    <canvas id="animation"></canvas>
-
-    <button id="stop">Stop</button>
+    <!-- <select id="category-select"></select> -->
     <button id="save-sequence">Save sequence</button>
+    <button id="stop">Stop</button>
+    <div id="status"></div>
     <script src="main.js"></script>
   </body>
 </html>

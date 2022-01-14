@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ProGAN</title>
     <style>
+      * {
+        box-sizing: border-box;
+      }
       html,
       body {
         overflow: hidden;
@@ -12,6 +15,7 @@
       }
       body {
         margin: 0;
+        padding: 10px;
         background-color: black;
         display: flex;
         justify-content: center;
@@ -19,15 +23,15 @@
       }
       #container {
         display: grid;
-        grid-template-columns: repeat(20, 64px);
-        grid-template-rows: repeat(20, 64px);
-        gap: 2px;
-        width: 1298px;
-        height: 1298px;
+        grid-template-columns: repeat(20, 1fr);
+        grid-template-rows: repeat(20, 1fr);
+        gap: 10px;
+        width: calc(100vmin - 20px);
+        height: calc(100vmin - 20px);
       }
       canvas {
-        width: 64px;
-        height: 64px;
+        max-width: 100%;
+        height: auto;
       }
     </style>
   </head>
