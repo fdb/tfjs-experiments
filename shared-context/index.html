@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ProGAN</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        overflow: hidden;
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        padding: 10px;
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      canvas {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"><canvas id="c" width="400" height="400" /></div>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
